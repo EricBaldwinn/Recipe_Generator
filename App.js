@@ -1,3 +1,4 @@
+import {Url, Token} from '@env';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
@@ -7,11 +8,10 @@ export const App = () => {
   const [ingredients, onChangeText] = React.useState("EX: salmon,thyme,lemon");
   const [usedIngredients, setUsedIngredients] = React.useState([]);
   const [missingIngredients, setMissingIngredients] = React.useState([]);
-  const url = 'https://api.spoonacular.com/recipes/findByIngredients';
 
 
   const getRecipe = () => {
-    axios.get(`${url}`, {params:{ingredients: ingredients, apiKey: `${token}`}})
+    axios.get(`${Url}`, {params:{ingredients: ingredients, apiKey: `${Token}`}})
     .then((response) => {
       setUsedIngredients(response.data[0].usedIngredients)
       setMissingIngredients(response.data[0].missedIngredients)
