@@ -4,7 +4,7 @@ const Port = 3000;
 const controllers = require('../controllers/controllers.js');
 
 app.use(express.json());
-app.use(express.static(__dirname + '/../client/dist'));
+
 
 app.get('/ingredients', controllers.getIngredients);
 

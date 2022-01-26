@@ -1,4 +1,4 @@
-require('dotenv').config({path:'/Users/eric/Sprints/Recipe-Gen/.env'})
+require('dotenv').config({path:'/Users/eric/Sprints/MVP-RecipeGen/Recipe-Generator/.env'})
 const axios = require('axios');
 
 

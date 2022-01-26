@@ -1,9 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import axios from 'axios';
 
-export default function App() {
+export const App = () => {
   const [ingredients, onChangeText] = React.useState("EX: salmon,thyme,lemon");
+  const [usedIngredients, setUsedIngredients] = React.useState([]);
+  const [missingIngredients, setMissingIngredients] = React.useState([]);
+  const url = 'https://api.spoonacular.com/recipes/findByIngredients';
+
+
+  const getRecipe = () => {
+    axios.get(`${url}`, {params:{ingredients: ingredients, apiKey: `${token}`}})
+    .then((response) => {
+      setUsedIngredients(response.data[0].usedIngredients)
+      setMissingIngredients(response.data[0].missedIngredients)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Text>
@@ -16,6 +33,7 @@ export default function App() {
       />
       <Button
       title="Find Recipe"
+      onPress={getRecipe}
       />
       <StatusBar style="auto" />
     </View>
