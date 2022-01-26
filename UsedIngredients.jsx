@@ -8,7 +8,7 @@ export const UsedIngredients = ({usedIngredients}) => {
  const ingredients = () => {
    return usedIngredients.map((ingredient) => {
      return(
-      <View key={ingredient.id}><Text>{ingredient.name}</Text></View>
+      <View key={ingredient.id}><Text>{ingredient.original}</Text></View>
      )
    })
  }
@@ -17,9 +17,16 @@ export const UsedIngredients = ({usedIngredients}) => {
   return(
     <View>
     <ScrollView>
-      <Text>Ingredients Used</Text>
+      <Text style={styles.titles}>Ingredients Used</Text>
      {ingredients()}
     </ScrollView>
     </View>
   )
 }
+
+
+const styles = StyleSheet.create({
+  titles: {
+    fontWeight: 'bold'
+  }
+})
