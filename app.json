@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Recipe-Generator",
+    "slug": "Recipe-Generator",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Recipe-Generator"
+}
