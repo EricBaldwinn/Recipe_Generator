@@ -19,9 +19,16 @@ export const Steps = ({steps}) => {
 
   return(
     <View>
-     <ScrollView>
+     <ScrollView style={styles.stepView}>
       {allSteps()}
      </ScrollView>
      </View>
   )
 }
+
+
+const styles = StyleSheet.create({
+  stepView: {
+    maxHeight: 180
+  }
+})

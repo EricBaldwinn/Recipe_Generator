@@ -13,17 +13,28 @@ export const MissedIngredients = ({missingIngredients}) => {
 
 
    return(
-     <View>
-     <ScrollView>
-       <Text style={styles.titles}>Ingredients Missing</Text>
+     <View style={styles.missed}>
+     <ScrollView style={styles.ingredientView}>
       {ingredients()}
      </ScrollView>
-     </View>
+      </View>
    )
 }
 
 const styles = StyleSheet.create({
   titles: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    top: 61
+  },
+  ingredientView: {
+    maxHeight: 100,
+    maxWidth: 120
+  },
+  missed: {
+    position: 'absolute',
+    left: '30%',
+    maxWidth: '100%',
+    top: 10,
+    left: 110
   }
 })

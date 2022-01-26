@@ -15,9 +15,8 @@ export const UsedIngredients = ({usedIngredients}) => {
 
 
   return(
-    <View>
-    <ScrollView>
-      <Text style={styles.titles}>Ingredients Used</Text>
+    <View style={styles.used}>
+    <ScrollView style={styles.ingredientView}>
      {ingredients()}
     </ScrollView>
     </View>
@@ -28,5 +27,15 @@ export const UsedIngredients = ({usedIngredients}) => {
 const styles = StyleSheet.create({
   titles: {
     fontWeight: 'bold'
+  },
+  ingredientView: {
+    maxHeight: 100,
+    maxWidth: 150
+  },
+  used: {
+    right: '20%',
+    width: '100%',
+    top: 10,
+    right: 100
   }
 })
