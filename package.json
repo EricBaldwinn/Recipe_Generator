@@ -4,14 +4,19 @@
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",
+    "server": "nodemon server/index.js",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "axios": "^0.25.0",
+    "dotenv": "^14.3.2",
     "expo": "~44.0.2",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
