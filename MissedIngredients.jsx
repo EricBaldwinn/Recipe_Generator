@@ -10,8 +10,6 @@ export const MissedIngredients = ({missingIngredients}) => {
       )
     })
   }
-
-
    return(
      <View style={styles.missed}>
      <ScrollView style={styles.ingredientView}>
@@ -33,7 +31,7 @@ const styles = StyleSheet.create({
   missed: {
     position: 'absolute',
     left: '30%',
-    maxWidth: '100%',
+    maxWidth: '85%',
     top: 10,
     left: 110
   }

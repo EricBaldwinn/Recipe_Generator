@@ -11,24 +11,38 @@ export const App = () => {
   const [ingredients, onChangeText] = React.useState("EX: salmon,thyme,lemon");
   const [usedIngredients, setUsedIngredients] = React.useState([]);
   const [missingIngredients, setMissingIngredients] = React.useState([]);
-  const [recipe, setRecipe] = React.useState({});
+  const [recipe, setRecipe] = React.useState([{title: ''}]);
   const [steps, setSteps] = React.useState([]);
+  const [count, setCount] = React.useState(0);
 
   const getRecipe = () => {
     axios.get(`${Url}`, { params: { ingredients: ingredients, apiKey: `${Token}` } })
       .then((response) => {
-        setUsedIngredients(response.data[0].usedIngredients)
-        setMissingIngredients(response.data[0].missedIngredients)
-        setRecipe(response.data[0])
+        setUsedIngredients(response.data[count].usedIngredients)
+        setMissingIngredients(response.data[count].missedIngredients)
+        setRecipe(response.data)
         setSteps([])
+        setCount(0)
       })
       .catch((err) => {
         console.log(err)
       })
   }
-
+  const getNextRecipe = () => {
+     axios.get(`${Url}`, { params: { ingredients: ingredients, apiKey: `${Token}` } })
+      .then((response) => {
+        setUsedIngredients(response.data[count].usedIngredients)
+        setMissingIngredients(response.data[count].missedIngredients)
+        setRecipe(response.data)
+        setSteps([])
+        setCount(count + 1)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   const getInstructions = () => {
-    axios.get(`${Url2}${recipe.id}/analyzedInstructions`, { params: { apiKey: `${Token}` } })
+    axios.get(`${Url2}${recipe[count].id}/analyzedInstructions`, { params: { apiKey: `${Token}` } })
       .then((response) => {
         setSteps(response.data[0].steps)
       })
@@ -36,7 +50,6 @@ export const App = () => {
         console.log(err)
       })
     }
-
   return (
     <View style={styles.container}>
       <Text style={styles.titles}>
@@ -47,16 +60,22 @@ export const App = () => {
         onChangeText={onChangeText}
         value={ingredients}
       />
+      <View style={styles.buttonContainer}>
       <Button
         title="Find Recipe"
         onPress={getRecipe}
       />
+      <Button
+      title="Get Next Recipe"
+      onPress={getNextRecipe}
+      />
+      </View>
       <StatusBar style="auto" />
-      <Text style={styles.titles}>{recipe.title}</Text>
+      <Text style={styles.titles}>{recipe[count].title}</Text>
       <Image
       style={styles.recipeImage}
       source={{
-        uri: recipe.image
+        uri: recipe[count].image
       }}
       />
       <Text style={styles.titleUsed}>Ingredients Used</Text>
@@ -110,5 +129,9 @@ const styles = StyleSheet.create({
   recipeImage: {
     width: 250,
     height: 120
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    height: 45
   }
 });
