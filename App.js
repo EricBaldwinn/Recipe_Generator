@@ -8,7 +8,7 @@ import { MissedIngredients } from './MissedIngredients.jsx';
 import { Steps } from './Steps.jsx';
 
 export const App = () => {
-  const [ingredients, onChangeText] = React.useState('Ex: chicken,rice,honey');
+  const [ingredients, onChangeText] = React.useState('chicken,lemon,thyme');
   const [usedIngredients, setUsedIngredients] = React.useState([]);
   const [missingIngredients, setMissingIngredients] = React.useState([]);
   const [recipe, setRecipe] = React.useState([{title: ''}]);

@@ -23,7 +23,7 @@ export const Steps = ({steps}) => {
 
 const styles = StyleSheet.create({
   stepView: {
-   height: 580,
+   height: 300,
    fontFamily: "monospace"
   }
 })
