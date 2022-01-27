@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   missed: {
     position: 'absolute',
     left: '30%',
-    maxWidth: '85%',
+    maxWidth: '95%',
     top: 10,
     left: 110
   }

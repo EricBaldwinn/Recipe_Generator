@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 
 
 export const Steps = ({steps}) => {
-
   const allSteps = () => {
     return steps.map((oneStep) => {
       return (
@@ -13,10 +12,6 @@ export const Steps = ({steps}) => {
       )
     })
   }
-
-
-
-
   return(
     <View>
      <ScrollView style={styles.stepView}>
@@ -26,9 +21,9 @@ export const Steps = ({steps}) => {
   )
 }
 
-
 const styles = StyleSheet.create({
   stepView: {
-    maxHeight: 180
+   height: 580,
+   fontFamily: "monospace"
   }
 })

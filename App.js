@@ -8,12 +8,13 @@ import { MissedIngredients } from './MissedIngredients.jsx';
 import { Steps } from './Steps.jsx';
 
 export const App = () => {
-  const [ingredients, onChangeText] = React.useState("EX: salmon,thyme,lemon");
+  const [ingredients, onChangeText] = React.useState('Ex: chicken,rice,honey');
   const [usedIngredients, setUsedIngredients] = React.useState([]);
   const [missingIngredients, setMissingIngredients] = React.useState([]);
   const [recipe, setRecipe] = React.useState([{title: ''}]);
   const [steps, setSteps] = React.useState([]);
   const [count, setCount] = React.useState(0);
+
 
   const getRecipe = () => {
     axios.get(`${Url}`, { params: { ingredients: ingredients, apiKey: `${Token}` } })
@@ -35,12 +36,15 @@ export const App = () => {
         setMissingIngredients(response.data[count].missedIngredients)
         setRecipe(response.data)
         setSteps([])
-        setCount(count + 1)
       })
       .catch((err) => {
         console.log(err)
       })
   }
+  useEffect(() => {
+    getNextRecipe()
+  }, [count])
+
   const getInstructions = () => {
     axios.get(`${Url2}${recipe[count].id}/analyzedInstructions`, { params: { apiKey: `${Token}` } })
       .then((response) => {
@@ -50,6 +54,7 @@ export const App = () => {
         console.log(err)
       })
     }
+
   return (
     <View style={styles.container}>
       <Text style={styles.titles}>
@@ -62,12 +67,14 @@ export const App = () => {
       />
       <View style={styles.buttonContainer}>
       <Button
+        color="#f194ff"
         title="Find Recipe"
         onPress={getRecipe}
       />
       <Button
-      title="Get Next Recipe"
-      onPress={getNextRecipe}
+      color="#f194ff"
+      title="Next Recipe"
+      onPress={() => {setCount(count + 1)}}
       />
       </View>
       <StatusBar style="auto" />
@@ -86,6 +93,7 @@ export const App = () => {
       </View>
       <View style={styles.steps}>
         <Button
+          color="#f194ff"
           title="Get Steps"
           onPress={getInstructions}
         />
@@ -98,7 +106,7 @@ export const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    backgroundColor: '#fff',
+    backgroundColor: '#DCDCDC',
     top: '10%',
     alignItems: 'center'
   },
@@ -114,15 +122,18 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   titles: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily: "monospace"
   },
   titleMissing: {
     fontWeight: 'bold',
+    fontFamily: "monospace",
     left: 100,
     top: 10
   },
   titleUsed: {
     fontWeight: 'bold',
+    fontFamily: "monospace",
     right: 115,
     top: 30
   },
@@ -132,6 +143,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    height: 45
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    height: 45,
+    width: '60%'
   }
 });
